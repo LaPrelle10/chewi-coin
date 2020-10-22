@@ -1,0 +1,42 @@
+# GCLOUD
+--------
+EXAMPLE:
+https://cloud.google.com/logging/docs/api/tasks/exporting-logs#creating_sinks
+Sink Identifier:
+
+  "my-first-sink"
+  
+Parent resource:
+
+  "projects/[PROJECT_ID]"
+"folders/[FOLDER_ID]"
+"billingAccounts/[BILLING_ACCOUNT_ID]"
+"organizations/[ORGANIZATION_ID]"
+
+Include Children Parameter:
+https://cloud.google.com/logging/docs/export/aggregated_sinks#creating_an_aggregated_sink
+
+gcloud logging sinks create [SINK_NAME] \
+storage.googleapis.com/[BUCKET_NAME] --include-children \
+--folder=[FOLDER_ID] --log-filter="logName:activity"
+
+Filter:
+
+"resource.type = gce_instance AND \
+   resource.labels.instance_id = "1428064241541024269" AND \
+   severity >= WARNING"
+
+Destination:
+
+"storage.googleapis.com/[BUCKET_ID]"
+"bigquery.googleapis.com/projects/[PROJECT_ID]/datasets/[DATASET_ID]"
+"pubsub.googleapis.com/projects/[PROJECT_ID]/topics/[TOPIC_ID]"
+"logging.googleapis.com/projects/[PROJECT_ID]/locations/[REGION]/buckets/[BUCKET_ID]"
+
+https://cloud.google.com/logging/docs/api/tasks/exporting-logs#using_a_unique_writer_identity
+
+writer Identity:
+[GENERATED_ID_1]@[GENERATED_ID_2].iam.gserviceaccount.com
+
+Older sinks:
+cloud-logs@system.gserviceaccount.com
